@@ -15,6 +15,10 @@
         "format": "cpp",
         "initializer_list": "cpp",
         "span": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "ctime": "cpp",
+        "tuple": "cpp",
+        "*.tcc": "cpp",
+        "iosfwd": "cpp"
     }
 }

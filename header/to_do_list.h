@@ -76,6 +76,7 @@ public:
     void debug();
 private:
     set<task*, CompareDate> *to_do;
+    //以下可能不會用到
     int max_name_size, max_category_size;
     list<pair<int *, pair<task* , task *> > > *un_re; //pair 之後改pointer指標
     list<pair<int *, pair<task* , task *> > >::iterator idx;
