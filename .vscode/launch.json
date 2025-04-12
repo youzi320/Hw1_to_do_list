@@ -3,5 +3,39 @@
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
-    "configurations": []
+    "configurations": [],
+    "setupCommands": [
+          {
+            "description": "Enable pretty-printing for gdb",
+            "text": "-enable-pretty-printing"
+          },
+          {
+            "description": "Skip all std:: functions",
+            "text": "skip function ^std::.*"
+          },
+          {
+            "description": "Skip basic_string.h",
+            "text": "skip file /usr/include/c++/14/bits/basic_string.h"
+          },
+          {
+            "description": "Skip stl_deque.h",
+            "text": "skip file /usr/include/c++/14/bits/stl_deque.h"
+          },
+          {
+            "description": "Skip stl_vector.h",
+            "text": "skip file /usr/include/c++/14/bits/stl_vector.h"
+          },
+          {
+            "description": "Skip shared_ptr_base.h",
+            "text": "skip file /usr/include/c++/14/bits/shared_ptr_base.h"
+          },
+          {
+            "description": "Skip unique_ptr.h",
+            "text": "skip file /usr/include/c++/14/bits/unique_ptr.h"
+          },
+          {
+            "description": "Skip move.h",
+            "text": "skip file /usr/include/c++/14/bits/move.h"
+          }
+    ]
 }

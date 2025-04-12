@@ -59,14 +59,14 @@ void to_do_list::add(string *name,string *date, string *category, bool *complete
     return;
 }
 
-void to_do_list::edit_name(string *name, string *date){
+void to_do_list::edit_name(string *name, string *date, string *e){
     set<task*, CompareDate>::iterator it = (*(this->to_do)).begin();
     for(;it != (*(this->to_do)).end();it++){
         if(*(*it)->get_name() == *name && *(*it)->get_date() == *date){
             task *tmp  = new task(*it);
 
             string *ptr = (*it)->get_name();
-            cin >> *ptr;
+            *ptr = *e;
 
             task *new_ = new task(*it);
             this->new_action(3, new_, tmp);
@@ -75,14 +75,14 @@ void to_do_list::edit_name(string *name, string *date){
     
 }
 
-void to_do_list::edit_date(string *name, string *date){
+void to_do_list::edit_date(string *name, string *date, string *e){
     set<task*, CompareDate>::iterator it = (*(this->to_do)).begin();
     for(;it != (*(this->to_do)).end();it++){
         if(*(*it)->get_name() == *name && *(*it)->get_date() == *date){
             task *tmp  = new task(*it);
 
             string *ptr = (*it)->get_date();
-            cin >> *ptr;
+            *ptr = *e;
 
             task *new_ = new task(*it);
             this->new_action(3, new_, tmp);
@@ -90,14 +90,14 @@ void to_do_list::edit_date(string *name, string *date){
     }
 }
 
-void to_do_list::edit_category(string *name, string *date){
+void to_do_list::edit_category(string *name, string *date, string *e){
     set<task*, CompareDate>::iterator it = (*(this->to_do)).begin();
     for(;it != (*(this->to_do)).end();it++){
         if(*(*it)->get_name() == *name && *(*it)->get_date() == *date){
             task *tmp  = new task(*it);
 
             string *ptr = (*it)->get_category();
-            cin >> *ptr;
+            *ptr = *e;
 
             task *new_ = new task(*it);
             this->new_action(3, new_, tmp);
@@ -105,14 +105,14 @@ void to_do_list::edit_category(string *name, string *date){
     }
 }
 
-void to_do_list::edit_completed(string *name, string *date){
+void to_do_list::edit_completed(string *name, string *date, bool *e){
     set<task*, CompareDate>::iterator it = (*(this->to_do)).begin();
     for(;it != (*(this->to_do)).end();it++){
         if(*(*it)->get_name() == *name && *(*it)->get_date() == *date){
             task *tmp  = new task(*it);
 
             bool *ptr = (*it)->get_completed();
-            cin >> *ptr;
+            *ptr = *e;
 
             task *new_ = new task(*it);
             this->new_action(3, new_, tmp);
@@ -127,7 +127,12 @@ void to_do_list::del(string *name, string *date, int flag){
     set<task*, CompareDate>::iterator it = (*(this->to_do)).begin();
     for(;it != (*(this->to_do)).end();it++){
         if(*(*it)->get_name() == *name && *(*it)->get_date() == *date){
+            
+            task *tmp  = new task(*it);
+            if(flag == 1)this->new_action(4, 0, tmp);
+            
             (*(this->to_do)).erase(it);
+            
             return; //不直接return 會出錯
         }
     }
@@ -145,8 +150,7 @@ void to_do_list::assign_task(task* a, task *t){
 
 void to_do_list::new_action(int type, task* ptr_list, task *ptr_record){
     pair<int *, pair<task *,task *> > *ptr = new pair<int *, pair<task *,task *> >;
-    ptr->second.first = new task;
-    ptr->second.second = new task;
+
 
     ptr->first = new int (type);
     if(ptr_list == 0){
