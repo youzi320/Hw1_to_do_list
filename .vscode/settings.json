@@ -20,6 +20,9 @@
         "tuple": "cpp",
         "*.tcc": "cpp",
         "iosfwd": "cpp",
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "iomanip": "cpp",
+        "cstring": "cpp",
+        "algorithm": "cpp"
     }
 }

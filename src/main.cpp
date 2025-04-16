@@ -29,14 +29,16 @@ int main(){
     }else{
         *day_zero = "/";
     }
-    *ymd = to_string(ltm->tm_year) + *mon_zero + to_string(ltm->tm_mon) + *day_zero + to_string(ltm->tm_mon);
+    *ymd = to_string(1900+ltm->tm_year) + *mon_zero + to_string(1+ltm->tm_mon) + *day_zero + to_string(ltm->tm_mday);
     // vector<int> *ymd = new vector<int>;
     // ymd->push_back(1970 + ltm->tm_year);
     // ymd->push_back(1 + ltm->tm_mon);
     // ymd->push_back(ltm->tm_mday);
     
     to_do_list *tdl = new to_do_list();
-    string *cmd = new string(1000,'\0');
+    tdl->test();
+
+    
     char *edit_mode = new char;
 
     string *add_name = new string(1000,'x');
@@ -53,23 +55,62 @@ int main(){
     string *tmp_category = new string(1000,'\0');
     bool *tmp_completed = new bool(false);
 
+    string *cmd = new string(1000,'\0');
     vector<string *> *cmd_record = new vector<string *>;
     string *cmd_tmp  = new string(1000,'\0');
     stringstream *ss = new stringstream;
-    int *op = new int;
+
+    string *op = new string(1000,'\0');
+
     int *tmp_int = new int;
     int *error_flag = new int;
 
 
-    string *tmp_str= new string(1000,'\0');
+    string *tmp_str = new string(1000,'\0');
+    string *user_name = new string(1000,'\0');
+
+    user *user_ = new user;
     //主介面
 	//login(/*fstream*/);
+    pair<pair<string*, size_t *>, to_do_list*> *data;
+while(1){
+    cout << endl << "welcome to To-Do list" << endl; //改更優美字型
+    cout << "Login (1)" << endl;
+    cout << "Register(2)" << endl;
+    cout << ">" ;
+    cin >> *op;
+    if(*op == "1"){
+        cout << "user name: ";
+        cin >> *user_name;
+        cout << "password: ";
+        cin >> *tmp_str;
+        if(user_->login(user_name, tmp_str) == 0){
+            cout << "No such user or incorrect password!!!" << endl;
+            continue;
+        }
+    }else if(*op == "2"){
+        cout << "user name: ";
+        cin >> *user_name;
+        cout << "password: ";
+        cin >> *tmp_str;
+        user_->add_user(user_name, tmp_str);
+        continue;
+    }else{
+        cout << "Not a valid command..." << endl;
+        continue;
+    }
     
+
+    data = user_->find_user(user_name);
+    tdl = data->second;
+
+    //getline(cin, *cmd);//目前沒有找到清空getline buffer更好的方式
+    cin.ignore();
+
     while(1){
         //tdl->debug(); 
-        cout << ">";
+        cout << *ymd << " - " << *user_name <<  " $ ";
 
-        //cin.ignore();
         getline(cin, *cmd);
         // ss->clear();
         // ss->str("");
@@ -82,7 +123,7 @@ int main(){
             cmd_tmp = new string(1000,'\0');
         }
         if(cmd_record->empty())continue;
-        auto cmd_it = cmd_record->begin();
+        vector<string *>::iterator cmd_it = cmd_record->begin();
 
         
         if(**cmd_it == "add"){
@@ -101,6 +142,14 @@ int main(){
             tdl->redo(cmd_record);
         }else if(**cmd_it == "man"){
            tdl->man(cmd_record);
+        }else if(**cmd_it == "logout"){
+            //存檔;
+            cmd_it = cmd_record->begin();
+            for(;cmd_it!=cmd_record->end();cmd_it++){ 
+                delete *cmd_it;
+            }
+            cmd_record->clear();
+            break;
         }
 
         cmd_it = cmd_record->begin();
@@ -108,7 +157,9 @@ int main(){
             delete *cmd_it;
         }
         cmd_record->clear();
+        //存檔;
     }
+}
 
     delete now;
     delete ltm;

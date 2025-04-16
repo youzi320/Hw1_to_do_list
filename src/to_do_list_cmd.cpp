@@ -5,10 +5,72 @@
 #include <list>
 #include <ctime>
 #include <iomanip>
+#include <cstring>
+#include <algorithm>
 #include "../header/to_do_list.h"
 
 using namespace std;
 
+int to_do_list::check_leap(int *y){
+    if(*y % 4 != 0){
+        return 0;
+    }else if(*y % 100 == 0 && *y % 400 != 0){
+        return 0;
+    }else{
+        return 1;
+    }
+}
+
+int to_do_list::check_date(string *add_date){
+    stringstream *ss = new stringstream;
+    int *y = new int;
+    int *m = new int;
+    int *d = new int;
+    set<int> *m_31 = new set<int>;
+    set<int> *m_30 = new set<int>;
+    *m_31 = {1,3,5,7,8,10,12};
+    *m_30 = {2,4,6,9,11};
+
+    if(count(add_date->begin(),add_date->end(), '/') != 2 ){
+        return 0;
+    }else{
+        replace(add_date->begin(),add_date->end(), '/', ' ');
+        *ss << *add_date;
+        if(*ss >> *y){
+            if(*y < 0){
+                return 0;
+            }
+        }else{
+            return 0;
+        }
+        if(*ss >> *m){
+            if(*m <=0 || *m > 12){
+                return 0;
+            }
+        }else{  
+            return 0;
+        }
+        if(*ss >> *d){
+
+            if(*d < 1 || *d > 31)return 0;
+
+            if(*d == 2){
+                if(!check_leap(d) && (*d > 28) ){
+                    return 0;
+                }else if(check_leap(d) && (*d > 30) ){
+                    return 0;
+                }
+            }else if(m_30->count(*m)){
+                if(*d > 30)return 0;
+            }
+        }else{
+            return 0;
+        }
+    }
+    replace(add_date->begin(),add_date->end(), ' ', '/');
+    return 1;
+
+}
 
 void to_do_list::add(vector<string *> *cmd_record){
     int *error_flag = new int;
@@ -42,6 +104,11 @@ void to_do_list::add(vector<string *> *cmd_record){
                     *add_name = (**next(cmd_it));
                 }else if( (**cmd_it) == "-d"){
                     *add_date = (**next(cmd_it));
+                    if(!check_date(add_date)){
+                        cout <<  "Not a valid date format!!!" << endl;
+                        cout << "Should be [year]/[month]/[date], ex. 2025/04/20" << endl;
+                        *error_flag = 1;
+                    }
                 }else if( (**cmd_it) == "-ca"){
                     *add_category = (**next(cmd_it));
                 }
@@ -203,7 +270,7 @@ void to_do_list::man (int *op){
     }else if(*op == 1){
         cout << "Usage: add [-n] [-d] [-ca]" << endl;
         cout << "-n\tname" << endl;
-        cout << "-d\tdate" << endl;
+        cout << "-d\tdate\tFormat:[year]/[month]/[date], ex. 2025/04/20" << endl;
         cout << "-c\tcategory" << endl;
     }else if(*op == 2){
         cout << "Usage: view [-a] [-m] [-ca]" << endl;
@@ -254,10 +321,10 @@ void to_do_list::man(vector<string *> *cmd_record){
     int *tmp_int = new int;
 
     if(cmd_record->size() < 2){
-        cout << "del: too few arguments..." << endl;
+        cout << "man: too few arguments..." << endl;
 
     }else if(cmd_record->size() > 2){
-        cout << "del: too many arguments..." << endl;
+        cout << "man: too many arguments..." << endl;
     }else{                  
         if(*(*cmd_record)[1] == "add"){
             *tmp_int = 1;
@@ -272,4 +339,61 @@ void to_do_list::man(vector<string *> *cmd_record){
     }
 
     delete tmp_int;
+}
+
+void to_do_list::calendar(vector<string *> *cmd_pre){
+    if(cmd_pre != 0 && cmd_pre->size() > 1){
+        cout << "calendar: too few arguments..." << endl;
+    }else{
+
+        int *y = new int(0);
+        int *m = new int(0);
+        int *w_day = new int(0);
+
+        string *cmd = new string(1000,'\0');
+        string *cmd_tmp  = new string(1000,'\0');
+        vector<string *> *cmd_record = new vector<string *>;
+        stringstream *ss = new stringstream;
+
+        while(1){
+
+            cout << "calendar # ";
+
+            getline(cin, *cmd);
+            delete ss;
+            ss = new stringstream;
+            *ss << *cmd;
+
+            while(*ss >> *cmd_tmp){
+                cmd_record->push_back(cmd_tmp);
+                cmd_tmp = new string(1000,'\0');
+            }
+            if(cmd_record->empty())continue;
+
+            vector<string *>::iterator cmd_it = cmd_record->begin();
+
+            if(**cmd_it == "year"){
+                year(cmd_record);
+            }else if(**cmd_it == "month"){
+                if(month(cmd_record)){
+                    print_month(now_month);
+                }
+            }else if(**cmd_it == "day"){
+
+            }
+            
+            cmd_it = cmd_record->begin();
+            for(;cmd_it!=cmd_record->end();cmd_it++){ 
+                delete *cmd_it;
+            }
+            cmd_record->clear();
+        }
+
+       
+    }
+}
+
+
+void to_do_list::test(){
+    calendar();
 }

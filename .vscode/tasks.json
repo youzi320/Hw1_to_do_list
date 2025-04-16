@@ -11,6 +11,8 @@
                 "src/task.cpp",
                 "src/to_do_list.cpp",
                 "src/to_do_list_cmd.cpp",
+                "src/user.cpp",
+                "src/calendar.cpp",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],

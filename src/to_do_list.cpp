@@ -5,18 +5,20 @@
 #include <list>
 #include <ctime>
 #include <iomanip>
+#include <cstring>
+#include <algorithm>
 #include "../header/to_do_list.h"
 
 using namespace std;
 
 
-to_do_list::to_do_list() : to_do(new set<task*,CompareDate>),max_name_size(6),max_category_size(10),un_re(new list<pair<int *, pair<task * , task *> > >), idx(0){}
+to_do_list::to_do_list() : to_do(new set<task*,CompareDateName>),max_name_size(6),max_category_size(10),un_re(new list<pair<int *, pair<task * , task *> > >), idx(0){}
     
 int  to_do_list::find_date(string *date) const{
     if(to_do == 0){
         return 0;
     }
-    set<task*, CompareDate>::iterator it = (*(this->to_do)).begin();
+    set<task*, CompareDateName>::iterator it = (*(this->to_do)).begin();
     for(;it != (*(this->to_do)).end();it++){
         if(*(*it)->get_date() == *date){
             return 1;
@@ -30,7 +32,7 @@ int to_do_list::find_name_date(string *name, string *date) const{
     if(to_do == 0){
         return 0;
     }
-    set<task*, CompareDate>::iterator it = (*(this->to_do)).begin();
+    set<task*, CompareDateName>::iterator it = (*(this->to_do)).begin();
     for(;it != (*(this->to_do)).end();it++){
         if(*(*it)->get_name() == *name && *(*it)->get_date() == *date){
             return 1;
@@ -49,6 +51,10 @@ void to_do_list::add(string *name,string *date, string *category, bool *complete
     task *tmp = new task(name,date,category, completed);
     //this->new_action
     this->to_do->insert(tmp);
+    this->to_do_date->insert(tmp);
+    this->to_do_category->insert(tmp);
+    this->to_do_completed->insert(tmp);
+
     if(flag == 1)this->new_action(1, tmp, 0); //type list record
     
     max_name_size = max(max_name_size, int((*name).size()));
@@ -60,7 +66,7 @@ void to_do_list::add(string *name,string *date, string *category, bool *complete
 }
 
 void to_do_list::edit_name(string *name, string *date, string *e){
-    set<task*, CompareDate>::iterator it = (*(this->to_do)).begin();
+    set<task*, CompareDateName>::iterator it = (*(this->to_do)).begin();
     for(;it != (*(this->to_do)).end();it++){
         if(*(*it)->get_name() == *name && *(*it)->get_date() == *date){
             task *tmp  = new task(*it);
@@ -76,7 +82,7 @@ void to_do_list::edit_name(string *name, string *date, string *e){
 }
 
 void to_do_list::edit_date(string *name, string *date, string *e){
-    set<task*, CompareDate>::iterator it = (*(this->to_do)).begin();
+    set<task*, CompareDateName>::iterator it = (*(this->to_do)).begin();
     for(;it != (*(this->to_do)).end();it++){
         if(*(*it)->get_name() == *name && *(*it)->get_date() == *date){
             task *tmp  = new task(*it);
@@ -91,7 +97,7 @@ void to_do_list::edit_date(string *name, string *date, string *e){
 }
 
 void to_do_list::edit_category(string *name, string *date, string *e){
-    set<task*, CompareDate>::iterator it = (*(this->to_do)).begin();
+    set<task*, CompareDateName>::iterator it = (*(this->to_do)).begin();
     for(;it != (*(this->to_do)).end();it++){
         if(*(*it)->get_name() == *name && *(*it)->get_date() == *date){
             task *tmp  = new task(*it);
@@ -106,7 +112,7 @@ void to_do_list::edit_category(string *name, string *date, string *e){
 }
 
 void to_do_list::edit_completed(string *name, string *date, bool *e){
-    set<task*, CompareDate>::iterator it = (*(this->to_do)).begin();
+    set<task*, CompareDateName>::iterator it = (*(this->to_do)).begin();
     for(;it != (*(this->to_do)).end();it++){
         if(*(*it)->get_name() == *name && *(*it)->get_date() == *date){
             task *tmp  = new task(*it);
@@ -124,7 +130,7 @@ void to_do_list::del(string *name, string *date, int flag){
     if(!this->find_name_date(name,date)){
         cout << "No such Task !!!" << endl;
     }
-    set<task*, CompareDate>::iterator it = (*(this->to_do)).begin();
+    set<task*, CompareDateName>::iterator it = (*(this->to_do)).begin();
     for(;it != (*(this->to_do)).end();it++){
         if(*(*it)->get_name() == *name && *(*it)->get_date() == *date){
             
@@ -231,7 +237,7 @@ void to_do_list::redo(){
 }
 
 void to_do_list::view_all_date() const{
-    set<task*, CompareDate>::iterator it = (*(this->to_do)).begin();
+    set<task*, CompareDateName>::iterator it = (*(this->to_do)).begin();
     string *str;
     str = new string(1000, 'x');
     cout << left;
@@ -243,7 +249,7 @@ void to_do_list::view_all_date() const{
 }
 
 void to_do_list::view_date(string *date) const{
-    set<task*, CompareDate>::iterator it = (*(this->to_do)).begin();
+    set<task*, CompareDateName>::iterator it = (*(this->to_do)).begin();
     string *str;
     str = new string(1000, 'x');
     cout << left;
@@ -252,6 +258,115 @@ void to_do_list::view_date(string *date) const{
         if(*(*it)->get_date() == *date)(*it)->view_task(max_name_size,max_category_size);
     }
     delete str;
+}
+
+void to_do_list::print_month(int *m){
+    set<task*, CompareDateName> *same_month = new set<task*, CompareDateName>;
+    for(auto i: *to_do){
+        string *tmp = i->get_date();
+        if( stoi(tmp->substr(tmp->find('/'), 2)) == *m ){
+            same_month->insert(i); 
+        }
+    }
+
+    set<int> *m_31 = new set<int>;
+    set<int> *m_30 = new set<int>;
+    *m_31 = {1,3,5,7,8,10,12};
+    *m_30 = {4,6,9,11};
+    int *d_amt = new int(0);
+
+    if(*m == 2){
+        if(check_leap(now_year)){
+            *d_amt = 29;
+        }else{
+            *d_amt = 28;
+        }
+    }else if(m_31->count(*m)){
+        *d_amt = 31;
+    }else{
+        *d_amt = 30;
+    }
+
+    struct tm *time = new struct tm;
+
+    memset(time, 0, sizeof(*time));
+
+    time->tm_mday = 1;
+    time->tm_mon = *m - 1;
+    time->tm_year = *now_year-1900;
+
+    mktime(time);
+    
+    for(int j=0;j<16*7;j++){
+        cout << "-";
+    }cout << endl;
+    cout << setw(9) << "Sun" << setw(7) << "|";
+    cout << setw(9) << "Mon" << setw(7) << "|";
+    cout << setw(9) << "Tue" << setw(7) << "|";
+    cout << setw(9) << "Wed" << setw(7) << "|";
+    cout << setw(9) << "Thu" << setw(7) << "|";
+    cout << setw(9) << "Fri" << setw(7) << "|";
+    cout << setw(9) << "Sat" << setw(7) << "|";
+    cout << endl;
+    for(int j=0;j<16*7;j++){
+        cout << "-";
+    }cout << endl;
+
+    //int *i = new int;
+    int *flag = new int(0);
+    string *space = new string("               ");
+    //int *j = new int;
+    int *p_day = new int(1);
+    vector< pair< pair< set<int>::const_iterator, set<int>::const_iterator>,  set<int>::iterator> > **date_task;
+    date_task = new vector< pair< pair< set<int>::const_iterator, set<int>::const_iterator>,  set<int>::iterator> >  *[7];
+
+    for(int i=0;i<7;i++){
+        date_task[i] = new vector< pair< pair< set<int>::const_iterator, set<int>::const_iterator>,  set<int>::iterator> > ;
+    }
+
+    while(*p_day <= *d_amt){
+
+        for(int j=0;j<7;j++){
+            if(*p_day <= *d_amt && (j == time->tm_wday || *flag == 1)){
+                *flag = 1;
+                if(*m < 10){
+                    cout << setw(6) << "0" << *m << "/" ; //額外變數++
+                }else{
+                    cout << setw(6) << *m << "/";
+                }
+                if(*p_day < 10){
+                    cout << "0" << *p_day;
+                }else{
+                    cout << *p_day;
+                }
+                (*p_day)++;
+                cout << setw(6) << "|";
+            }else{
+                cout << *space << "|";
+            }
+            
+        }cout << endl;
+
+        for(int j=0;j<16*7;j++){
+            cout << "-";
+        }cout << endl;
+        //for一大格為一天(一大格j小格)
+        for(int j=0;j<6;j++){
+            for(int k=0;k<7;k++){
+                if(/*當天有task*/1){
+                    cout << setw(15) << "|";
+                }else{
+                    cout << *space << "|";
+                }
+            }cout << endl;
+        }
+       for(int j=0;j<16*7;j++){
+            cout << "-";
+        }cout << endl;
+
+    }
+    
+
 }
 
 to_do_list::~to_do_list(){

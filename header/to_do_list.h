@@ -9,12 +9,13 @@
 #include <ctime>
 #include <iomanip>
 #include "task.h"
-#include "CompareDate.h"
+#include "CompareSet.h"
+#include "../header/calendar.h"
 
 using namespace std;
 
 
-class to_do_list{
+class to_do_list : public calendar{
 public:
 
     
@@ -40,6 +41,10 @@ public:
     /*回傳特定task回傳是否在*to_do set中*/
     int find_date(string *date) const;
     
+    
+    int check_leap(int *y);
+    int check_date(string *add_date);
+
     /*新增task到*to_do set中*/
     void add(vector<string *> *cmd_record);
     void add(string *name,string *date, string *category, bool *completed, int flag = 1);
@@ -85,11 +90,20 @@ public:
     /*依據date排序輸出所有task*/
     void view_all_date() const;
 
+    void calendar(vector<string *> *cmd_record = 0);
+    void print_month(int *m);
+
     ~to_do_list();
 
     void debug();
+    void test();
+
 private:
-    set<task*, CompareDate> *to_do;
+    set<task*, CompareDateName> *to_do;
+    set<task*, CompareDate> *to_do_date;
+    set<task*, CompareCategory> *to_do_category;
+    set<task*, CompareCompleted> *to_do_completed;
+
     //以下可能不會用到
     int max_name_size, max_category_size;
     list<pair<int *, pair<task* , task *> > > *un_re; //pair 之後改pointer指標
