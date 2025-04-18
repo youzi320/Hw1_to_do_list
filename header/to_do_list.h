@@ -40,10 +40,6 @@ public:
 
     /*回傳特定task回傳是否在*to_do set中*/
     int find_date(string *date) const;
-    
-    
-    int check_leap(int *y);
-    int check_date(string *add_date);
 
     /*新增task到*to_do set中*/
     void add(vector<string *> *cmd_record);
@@ -58,6 +54,7 @@ public:
     void edit_category(string *name, string *date, string *e);
 
     void edit_completed(string *name, string *date, bool *e);
+    void edit_completed(string *name, string *date);
 
     void del(vector<string *> *cmd_record);
     void del(string *name, string *date, int flag = 1);
@@ -70,11 +67,11 @@ public:
 
     /*根據紀錄的add del edit操作恢復上一步*/
     void undo(vector<string *> *cmd_record);
-    void undo();
+    int undo();
 
     /*根據紀錄的add del edit操作重做*/
     void redo(vector<string *> *cmd_record);
-    void redo();
+    int redo();
 
 
 
@@ -86,12 +83,18 @@ public:
     void view(vector<string *> *cmd_record);
     /*依據date輸出當日所有task*/
     void view_date(string *date) const;
-
     /*依據date排序輸出所有task*/
     void view_all_date() const;
+    void view_undone() const;
+    void view_done() const;
 
-    void calendar(vector<string *> *cmd_record = 0);
+    void calendar(vector<string *> *cmd_pre = 0);
     void print_month(int *m);
+    void print_day(int *d);
+
+    void mt(vector<string *> *cmd_record);
+
+    int load_user();
 
     ~to_do_list();
 
@@ -99,10 +102,7 @@ public:
     void test();
 
 private:
-    set<task*, CompareDateName> *to_do;
-    set<task*, CompareDate> *to_do_date;
-    set<task*, CompareCategory> *to_do_category;
-    set<task*, CompareCompleted> *to_do_completed;
+    vector<task*> *to_do;
 
     //以下可能不會用到
     int max_name_size, max_category_size;

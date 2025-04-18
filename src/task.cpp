@@ -11,9 +11,9 @@ task::task(){
 }
 
 task::task(string *name, string *date, string *category, bool *completed){//預設none?
-    this->name = new string(1000,'x');
-    this->date = new string(15,'x');
-    this->category = new string(15,'x');
+    this->name = new string(1000,'\0');
+    this->date = new string(15,'\0');
+    this->category = new string(15,'\0');
     this->completed = new bool(false);
     this->is_new_ = new bool(false);
 
@@ -21,6 +21,13 @@ task::task(string *name, string *date, string *category, bool *completed){//預�
     *(this->category) = *category;
     *(this->date) = *date;
     *(this->completed) = *completed;
+}
+
+task::task(string *date){//預設none?
+
+    this->date = new string(15,'\0');
+
+    *(this->date) = *date;
 }
 
 task::task(task *copy){//預設none?
@@ -39,8 +46,9 @@ task::task(task *copy){//預設none?
 }
 
 void task::view_task(int m_n, int c_n){
-    cout << setw(15) << *this->name << setw(15) << *this->date  << setw(15)  << *this->category << setw(15) << *this->completed << endl;  
-    cout << "---------------------------------------------------------------" << endl;
+    cout << "|";
+    cout << setw(20) << *this->name << "|" << setw(20) << *this->date << "|" << setw(20)  << *this->category << "|" <<  setw(20) << *this->completed << "|" << endl;  
+    cout << "-------------------------------------------------------------------------------------" << endl;
 }
 
 string * task::get_name() const{

@@ -1,3 +1,6 @@
+#ifndef COMPARESET_H
+#define COMPARESET_H
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -51,3 +54,5 @@ class CompareCompleted
         return *(c1->get_completed()) < *(c2->get_completed());
     }
 };
+
+#endif

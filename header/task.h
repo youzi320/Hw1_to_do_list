@@ -19,6 +19,8 @@ public:
 
     /*初始化各字串與bool，分配新空間並copy name,date, category至新空間*/
     task(string *name, string *date, string *category, bool *completed);//預設none?
+
+    task(string *date);//預設none?
     
     /*copy constructor 是分配新空間並copy的ptr全複製版本*/
     task(task *copy);

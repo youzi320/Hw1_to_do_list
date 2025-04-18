@@ -23,6 +23,7 @@
         "sstream": "cpp",
         "iomanip": "cpp",
         "cstring": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "fstream": "cpp"
     }
 }

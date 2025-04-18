@@ -13,6 +13,8 @@
                 "src/to_do_list_cmd.cpp",
                 "src/user.cpp",
                 "src/calendar.cpp",
+                "src/sort_cmp.cpp",
+                "src/check.cpp",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],

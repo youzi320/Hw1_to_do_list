@@ -1,4 +1,4 @@
-#include <iostream>
+#include <iostream> //d ok
 #include <string>
 #include <vector>
 #include <set>
@@ -7,6 +7,7 @@
 #include <ctime>
 #include <iomanip>
 #include <sstream>
+#include <conio.h>
 
 #include "../header/user.h"
 
@@ -16,6 +17,7 @@ using namespace std;
 int main(){
 
     time_t *now = new time_t(time(0));
+    
     tm *ltm = localtime(&(*now));
     string *ymd = new string(20,'x');
     string *mon_zero = new string(2,'x'), *day_zero = new string(2,'x');
@@ -30,15 +32,8 @@ int main(){
         *day_zero = "/";
     }
     *ymd = to_string(1900+ltm->tm_year) + *mon_zero + to_string(1+ltm->tm_mon) + *day_zero + to_string(ltm->tm_mday);
-    // vector<int> *ymd = new vector<int>;
-    // ymd->push_back(1970 + ltm->tm_year);
-    // ymd->push_back(1 + ltm->tm_mon);
-    // ymd->push_back(ltm->tm_mday);
-    
-    to_do_list *tdl = new to_do_list();
-    tdl->test();
 
-    
+    to_do_list *tdl = new to_do_list();
     char *edit_mode = new char;
 
     string *add_name = new string(1000,'x');
@@ -61,45 +56,177 @@ int main(){
     stringstream *ss = new stringstream;
 
     string *op = new string(1000,'\0');
+    string *register_op = new string(1000,'\0');
 
     int *tmp_int = new int;
     int *error_flag = new int;
 
 
     string *tmp_str = new string(1000,'\0');
-    string *user_name = new string(1000,'\0');
 
-    user *user_ = new user;
+    
+
+    char *ch = new char;
     //主介面
 	//login(/*fstream*/);
     pair<pair<string*, size_t *>, to_do_list*> *data;
+    int *in_login = new int(1); 
+
+    if(user_->load_user() == 0){
+        cout << "Error !!!" << endl;
+        return 0;
+    }
 while(1){
-    cout << endl << "welcome to To-Do list" << endl; //改更優美字型
-    cout << "Login (1)" << endl;
-    cout << "Register(2)" << endl;
-    cout << ">" ;
-    cin >> *op;
-    if(*op == "1"){
-        cout << "user name: ";
-        cin >> *user_name;
-        cout << "password: ";
-        cin >> *tmp_str;
-        if(user_->login(user_name, tmp_str) == 0){
-            cout << "No such user or incorrect password!!!" << endl;
+    while(*in_login){
+        cout << "================================" << endl;
+        cout << "      Welcome to To-Do list     " << endl;
+        cout << "================================" << endl;
+        cout << "Login (1)" << endl;
+        cout << "Register(2)" << endl;
+        cout << "Delete User(3)" << endl;
+        cout << "---------------------" << endl;
+        cout << "> " ;
+        cin >> *op;
+        if(*op == "1"){
+            cout << "user name: ";
+            cin >> *user_name;
+            cout << "password: ";
+            cin >> *tmp_str;
+            if(user_->login(user_name, tmp_str) == 0){
+                cout << endl << endl << "Incorrect User or Incorrect Password!!!" << endl;
+                continue;
+            }
+            *in_login = 0;
+        }else if(*op == "2"){
+            user_name->clear();
+            tmp_str->clear();
+            while(1){
+                cout << "================================" << endl;
+                cout << "          Register Menu         " << endl;
+                cout << "================================" << endl;
+                cout << "Enter (or Change) User Name: (1)" << endl;
+                cout << "Enter (or Change) Password:  (2)" << endl;
+                cout << "Comfirm:                     (3)" << endl;
+                cout << "Don't Save and Quit:         (4)" << endl;
+                cout << "--------------------------------" << endl;
+                cout << "Current User Name: ";
+                if(user_name->empty()){
+                    cout << "none" << endl;;
+                }else{
+                cout << *user_name << endl;
+                }
+                cout << "--------------------------------" << endl;
+                cout << "> " ;
+                cin >> *register_op;
+
+                if(*register_op == "1"){
+                    cout << "Enter Name: ";
+                    cin >> *user_name;
+                }else if(*register_op == "2"){
+                    cout << "Enter Password: ";
+                    while((*ch = getch() ) != '\r'){
+                        if(*ch == '\b'){
+                            if(!tmp_str->empty()){
+                                tmp_str->pop_back();
+                            }
+                            cout << "\b \b";
+                        }else{
+                            tmp_str->push_back(*ch);
+                            cout << "*";
+                        }
+                    }
+                    cout << endl;
+                }else if(*register_op == "3"){
+                    if(user_name->empty() || tmp_str->empty()){
+                        cout << endl << "User Name or Password is Unset !!!" << endl;
+                        continue;
+                    }
+                    
+                    if(user_->create_user_file(user_name, tmp_str) ){
+                        user_->add_user(user_name, tmp_str);
+                        cout << endl << "User Added Successfully" << endl;
+                        break;
+                    }else{
+                        cout << endl << "User already exists!!!" << endl;
+                        continue;
+                    }
+
+                    break;
+                }else if(*register_op == "4"){
+                    user_name->clear();
+                    tmp_str->clear();
+                    break;
+                }else{
+                    cout << endl << "Not a valid command..." << endl << endl;
+                    continue;
+                }
+            }
+        
+            continue;
+        }else if(*op == "3"){
+            user_name->clear();
+            tmp_str->clear();
+            while(1){
+                cout << "================================" << endl;
+                cout << "       User Deletion Menu       " << endl;
+                cout << "================================" << endl;
+                cout << "Enter (or Change) User Name: (1) " << endl;
+                cout << "Comfirm and Delete:          (2) " << endl;
+                cout << "Don't Save and Quit:         (3)" << endl;
+                cout << "--------------------------------" << endl;
+                cout << "Current User Name: ";
+                if(user_name->empty()){
+                    cout << "none" << endl;;
+                }else{
+                cout << *user_name << endl;
+                }
+                cout << "--------------------------------" << endl;
+                cout << "> " ;
+                cin >> *register_op;
+
+                if(*register_op == "1"){
+                    cout << "Enter Name: ";
+                    cin >> *user_name;
+                }else if(*register_op == "2"){
+                    if(user_name->empty()){
+                        cout << endl << "User Name is Unset !!!" << endl;
+                        continue;
+                    }
+                    cout << "Enter Password: ";
+                    while((*ch = getch() ) != '\r'){
+                        if(*ch == '\b'){
+                            if(!tmp_str->empty()){
+                                tmp_str->pop_back();
+                            }
+                            cout << "\b \b";
+                        }else{
+                            tmp_str->push_back(*ch);
+                            cout << "*";
+                        }
+                    }
+                    if(user_->delete_user_file(user_name, tmp_str) == 1){
+                        user_->del_user(user_name, tmp_str);
+                        cout << endl << endl << "User Deleted Successfully" << endl;
+                        break;
+                    }else{
+                        continue;
+                    }
+                }else if(*register_op == "3"){
+                    user_name->clear();
+                    tmp_str->clear();
+                    break;
+                }else{
+                    cout << endl << "Not a valid command..." << endl;
+                    continue;
+                }
+            }
+        }else{
+            cout << endl << "Not a valid command..." << endl;
             continue;
         }
-    }else if(*op == "2"){
-        cout << "user name: ";
-        cin >> *user_name;
-        cout << "password: ";
-        cin >> *tmp_str;
-        user_->add_user(user_name, tmp_str);
-        continue;
-    }else{
-        cout << "Not a valid command..." << endl;
-        continue;
-    }
     
+    }
+        
 
     data = user_->find_user(user_name);
     tdl = data->second;
@@ -128,6 +255,7 @@ while(1){
         
         if(**cmd_it == "add"){
             tdl->add(cmd_record);
+            
         }else if(**cmd_it == "view"){
             tdl->view(cmd_record);
         }else if(**cmd_it == "edit"){
@@ -142,6 +270,8 @@ while(1){
             tdl->redo(cmd_record);
         }else if(**cmd_it == "man"){
            tdl->man(cmd_record);
+        }else if(**cmd_it == "calendar" || **cmd_it == "cal"){
+            tdl->calendar(cmd_record);
         }else if(**cmd_it == "logout"){
             //存檔;
             cmd_it = cmd_record->begin();
@@ -149,7 +279,10 @@ while(1){
                 delete *cmd_it;
             }
             cmd_record->clear();
+            *in_login = 1;
             break;
+        }else{
+            cout << endl << "No Such Command !!!" << endl;
         }
 
         cmd_it = cmd_record->begin();
@@ -166,15 +299,32 @@ while(1){
     delete ymd;
     delete mon_zero;
     delete day_zero;
+    delete ymd;
     delete tdl;
-    delete op;
     delete edit_mode;
+
+    delete add_name;
+    delete add_date;
+    delete add_category;
+    delete add_completed;
+
     delete tmp_name;
     delete tmp_date;
     delete tmp_category;
     delete tmp_completed;
-    delete tmp_str;
+
+    delete cmd;
+    delete cmd_record;
+    delete cmd_tmp;
+    delete ss;
+    delete op;
+    delete register_op;
     delete tmp_int;
+    delete error_flag;
+    delete tmp_str;
+    delete ch;
+    delete in_login;
+
     return 0;
 }
 
@@ -204,17 +354,23 @@ command 報錯訊息
 */
 
 
- 
+/* New-To-Do
+calendar 新增,刪除,修改指令 (OK)
+undone task (OK)
+指令簡化(不同指令可用同功能) (No)
+讀寫使用者檔案 (OK)
 
-void display_user(){
+刪除使用者(OK)
+註冊使用者功能可退出 (OK)
+檢查都用指標
+檢查刪除配置空間
+檢查作業規定
+輸入字串長度檢查
+報錯訊息優化(雙空格)
+man 功能(readme)
+把new strinig(1000, '\0')改掉
+檢查
 
-}
-
-void login(/*fstream*/){
-    //文字
-	string username;
-	cout << "login username: ";
-	cin >> username;
-	//開檔讀檔
-}
-
+簡化程式碼(如file 的add del ... etc 用一個function並傳入string決定add , del ...etc)
+刪除修改新增等結束後輸出調整在函數外，並新增(若原本沒有輸出)
+*/
