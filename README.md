@@ -85,5 +85,6 @@ mt [-e] [-add] [-done] [-del]
 -undone [name]: 使用 -undone flag 時，需帶參數 [name]，將當日名為 [name] 的任務的 completed 欄位改為 0(未完成)
 ```
 ## 使用者登入功能
-- 可以依據登入介面註冊使用者帳號與密碼，之後就可以登入 To-Do list，使用者帳號會存在./src./user_file/user_data.txt中，其中密碼會經過雜湊後儲存
+- 可以在登入介面註冊使用者帳號與密碼，註冊完就可以登入並使用 To-Do list
+- 使用者帳號與 To-Do list 資料持存在"./src./user_file/user_data.txt"中，其中密碼會經過雜湊後儲存
 
