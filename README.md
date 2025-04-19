@@ -6,7 +6,8 @@
 一個task(任務)有以下欄位:
 | name             | date             | category         | completed         |
 |------------------|------------------|------------------|-------------------|
-相同名子與日期的任務在視為同一個任務
+
+- 相同名子與日期的任務在視為同一個任務
 
 ## 功能列表
 - Add a task
@@ -23,23 +24,27 @@
 ## 指令說明
 
 ### add
-add 指令至少要帶以下一種flag
+- add 指令至少要帶以下一種flag
 ```
 add [-n] [-d] [-ca]
 -n [name]: 使用 -n flag 時，需帶參數 [name] 當作新增的任務名
 -d [date]: 使用 -d flag 時，需帶參數 [date] 當作新增的日期，日期格式: [year]/[month]/[date], ex. 2025/04/20
 -ca [category]: 使用 -ca flag 時，需帶參數 [category] 當作新增的任務分類
+
+ex. add -n t1 -d 2025/04/20 (新增名為 t1 日期為 2025/04/20 的任務)
 ```
 ### view
-view 不帶flag時預設為輸出全部任務(排列順序為1.日期 2.是否完成 3.名字)
+- view 不帶flag時預設為輸出全部任務(排列順序為1.日期 2.是否完成 3.名字)
 ```
 view [-a] [-n] [-d] [-ca] [-done] [-undone]
 -a: 輸出全部任務(排列順序為1.日期 2.是否完成 3.名子)
--n: 依照名字順序輸出
--d: 依照日期順序輸出
--ca: 依照類別順序輸出
+-n [name]: 順序全部名為 [name] 的任務
+-d [date]: 順序全部日期為 [date] 的任務
+-ca [category]: 順序全部類別為 [category] 的任務
 -done: 輸出已完成任務
 -undone: 輸出未完成任務
+
+ex. view -done (輸出全部未完成任務)
 ```
 
 ### edit
@@ -50,7 +55,7 @@ edit [original name] [orginal date] [-n] [-d] [-ca] [-co]
 -ca [new category]: 使用 -ca flag 時，需帶參數 [new category]，將 orginal task 的分類改為 [new category]
 -co [new completed]: 使用 -co flag 時，需帶參數 1 或 0，將 orginal task 的 completed 欄位改為 1(完成)或 0(未完成)
 
-ex. 
+ex. edit t1 2025/04/20 -n t2 (將名為 t1 的任務名子改為 t2)
 ```
 
 ### del
@@ -59,7 +64,7 @@ del [name] [date] : 刪除名子為 [name]，日期為 [date] 的任務
 ```
 
 ### calendar mode
-行事曆模式，在此模式下可以使用以下指令:
+- 行事曆模式，在此模式下可以使用以下指令:
 #### calendar
 ```
 calendar: 進入行事曆模式               
@@ -71,7 +76,7 @@ calendar: 進入行事曆模式
 - day [day]: 設定為 [year] 年 [month] 月[day] 日，並輸出當日任務(使用此指令時需先設定年份與月份)
 ```
 #### mt
-設定好年份、月份與天時，可以使用此指令
+- 設定好年份、月份與天時，可以使用此指令
 ```
 mt [-e] [-add] [-done] [-del]
 -e [original name] [new name]: 使用 -e flag 時，需帶參數 [new name]，將當日 orginal task 的名子改為 [name]
@@ -80,5 +85,5 @@ mt [-e] [-add] [-done] [-del]
 -undone [name]: 使用 -undone flag 時，需帶參數 [name]，將當日名為 [name] 的任務的 completed 欄位改為 0(未完成)
 ```
 ## 使用者登入功能
-可以依據登入介面註冊使用者帳號與密碼，之後就可以登入 To-Do list，使用者帳號會存在./src./user_file/user_data.txt中，其中密碼會經過雜湊後儲存
+- 可以依據登入介面註冊使用者帳號與密碼，之後就可以登入 To-Do list，使用者帳號會存在./src./user_file/user_data.txt中，其中密碼會經過雜湊後儲存
 
