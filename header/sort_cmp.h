@@ -1,14 +1,7 @@
 #ifndef SORT_CMP_H
 #define SORT_CMP_H
 
-#include <iostream>
-#include <string>
-#include <vector>
-#include <set>
-#include <list>
-#include <ctime>
-#include <iomanip>
-#include "../header/task.h"
+#include "task.h"
 
 using namespace std;
 

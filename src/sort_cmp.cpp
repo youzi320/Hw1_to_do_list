@@ -1,4 +1,4 @@
-#include <iostream>
+#include <iostream> //d ok //p ok
 #include <string>
 #include <vector>
 #include <set>
@@ -10,9 +10,7 @@
 
 using namespace std;
 
-
 bool cmp_completed_date_name(const task* c1, const task* c2){
-    
     if(*(c1->get_date()) == *(c2->get_date())){
         if(*(c1->get_completed()) == *(c2->get_completed())){
             return *(c1->get_name()) < *(c2->get_name());

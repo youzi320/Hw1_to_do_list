@@ -8,22 +8,23 @@
 #include <list>
 #include <ctime>
 #include <iomanip>
-#include "../header/to_do_list.h"
+#include "to_do_list.h"
 
 using namespace std;
 
 class calendar{
 public:
 
-    calendar(){
-        now_year = new int(0);
-        now_month  = new int(0);
-        now_day = new int(0);
-    }
+    calendar();
 
-    void year(vector<string *> *cmd_record);
+    int is_valid(vector<string *> *cmd_record, int *input, int *mn, int *mx, string *cmd);
+
+
+    int year(vector<string *> *cmd_record);
     int month(vector<string *> *cmd_record);
     int day(vector<string *> *cmd_record);
+
+    virtual ~calendar();
     
 protected:
     int *now_year;

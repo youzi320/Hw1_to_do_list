@@ -1,0 +1,41 @@
+Date : 2025-04-19 11:21:57
+Directory : d:\nycu course\2025_spring\Data Structures and Object-oriented Programming\hw1\Hw_1_to_do_list\to_do_list
+Total : 15 files,  -389 codes, -91 comments, -22 blanks, all -502 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| C++      |         15 |       -389 |        -91 |        -22 |       -502 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                             | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                                |         15 |       -389 |        -91 |        -22 |       -502 |
+| header                                                                                                                           |          5 |        -24 |        -14 |        -11 |        -49 |
+| src                                                                                                                              |         10 |       -365 |        -77 |        -11 |       -453 |
++----------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                                                         | language | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| d:\nycu course\2025_spring\Data Structures and Object-oriented Programming\hw1\Hw_1_to_do_list\to_do_list\header\calendar.h      | C++      |         -3 |          0 |          2 |         -1 |
+| d:\nycu course\2025_spring\Data Structures and Object-oriented Programming\hw1\Hw_1_to_do_list\to_do_list\header\cmd_rec.h       | C++      |        -19 |          0 |         -9 |        -28 |
+| d:\nycu course\2025_spring\Data Structures and Object-oriented Programming\hw1\Hw_1_to_do_list\to_do_list\header\task.h          | C++      |         -2 |          0 |         -2 |         -4 |
+| d:\nycu course\2025_spring\Data Structures and Object-oriented Programming\hw1\Hw_1_to_do_list\to_do_list\header\to_do_list.h    | C++      |         -1 |        -14 |         -3 |        -18 |
+| d:\nycu course\2025_spring\Data Structures and Object-oriented Programming\hw1\Hw_1_to_do_list\to_do_list\header\user.h          | C++      |          1 |          0 |          1 |          2 |
+| d:\nycu course\2025_spring\Data Structures and Object-oriented Programming\hw1\Hw_1_to_do_list\to_do_list\src\calendar.cpp       | C++      |          8 |          0 |         16 |         24 |
+| d:\nycu course\2025_spring\Data Structures and Object-oriented Programming\hw1\Hw_1_to_do_list\to_do_list\src\check.cpp          | C++      |        -17 |          0 |          2 |        -15 |
+| d:\nycu course\2025_spring\Data Structures and Object-oriented Programming\hw1\Hw_1_to_do_list\to_do_list\src\main.cpp           | C++      |          1 |          0 |          3 |          4 |
+| d:\nycu course\2025_spring\Data Structures and Object-oriented Programming\hw1\Hw_1_to_do_list\to_do_list\src\sort_cmp.cpp       | C++      |          0 |          0 |         -2 |         -2 |
+| d:\nycu course\2025_spring\Data Structures and Object-oriented Programming\hw1\Hw_1_to_do_list\to_do_list\src\task.cpp           | C++      |         -1 |         -1 |         -2 |         -4 |
+| d:\nycu course\2025_spring\Data Structures and Object-oriented Programming\hw1\Hw_1_to_do_list\to_do_list\src\test.cpp           | C++      |         -9 |          0 |         -6 |        -15 |
+| d:\nycu course\2025_spring\Data Structures and Object-oriented Programming\hw1\Hw_1_to_do_list\to_do_list\src\tmp.cpp            | C++      |       -432 |        -58 |        -52 |       -542 |
+| d:\nycu course\2025_spring\Data Structures and Object-oriented Programming\hw1\Hw_1_to_do_list\to_do_list\src\to_do_list.cpp     | C++      |         10 |        -15 |          6 |          1 |
+| d:\nycu course\2025_spring\Data Structures and Object-oriented Programming\hw1\Hw_1_to_do_list\to_do_list\src\to_do_list_cmd.cpp | C++      |         22 |         -2 |          2 |         22 |
+| d:\nycu course\2025_spring\Data Structures and Object-oriented Programming\hw1\Hw_1_to_do_list\to_do_list\src\user.cpp           | C++      |         53 |         -1 |         22 |         74 |
+| Total                                                                                                                            |          |       -389 |        -91 |        -22 |       -502 |
++----------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

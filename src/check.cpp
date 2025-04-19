@@ -1,4 +1,4 @@
-#include <iostream>
+#include <iostream> //d ok //p ok
 #include <string>
 #include <vector>
 #include <set>
@@ -11,66 +11,51 @@
 
 using namespace std;
 
-
 int check_leap(int *y){
-    if(*y % 4 != 0){
-        return 0;
-    }else if(*y % 100 == 0 && *y % 400 != 0){
-        return 0;
-    }else{
-        return 1;
-    }
+    return (*y % 4 == 0 && *y % 100 != 0) || (*y % 400 == 0);
 }
 
 int check_date(string *add_date){
+    
     stringstream *ss = new stringstream;
     int *y = new int;
     int *m = new int;
     int *d = new int;
-    set<int> *m_31 = new set<int>;
+    int *error_flag = new int(0);
     set<int> *m_30 = new set<int>;
-    *m_31 = {1,3,5,7,8,10,12};
     *m_30 = {2,4,6,9,11};
 
-    if(add_date->length() != 10){
-        return 0;
-    }else if(count(add_date->begin(),add_date->end(), '/') != 2 ){
-        return 0;
-    }else{
-        replace(add_date->begin(),add_date->end(), '/', ' ');
-        *ss << *add_date;
-        if(*ss >> *y){
-            if(*y < 0){
-                return 0;
-            }
-        }else{
-            return 0;
-        }
-        if(*ss >> *m){
-            if(*m <=0 || *m > 12){
-                return 0;
-            }
-        }else{  
-            return 0;
-        }
-        if(*ss >> *d){
+    char *s1 = new char, *s2 = new char;
 
-            if(*d < 1 || *d > 31)return 0;
+    *ss << *add_date;
+    *ss >> *y >> *s1 >> *m >> *s2 >> *d;
 
-            if(*d == 2){
-                if(!check_leap(d) && (*d > 28) ){
-                    return 0;
-                }else if(check_leap(d) && (*d > 30) ){
-                    return 0;
-                }
-            }else if(m_30->count(*m)){
-                if(*d > 30)return 0;
-            }
-        }else{
-            return 0;
+    if(ss->fail() || add_date->length() != 10 || *s1 != '/' || *s2 != '/'){
+        *error_flag = 1;
+    }else if(*y < 0 || *m < 1 || *m > 12 || *d < 1 || *d > 31){
+        *error_flag = 1;
+    }else if(*d == 2){
+        if(!check_leap(y) && (*d > 28) ){
+            *error_flag = 1;
+        }else if(check_leap(y) && (*d > 29) ){
+            *error_flag = 1;
         }
+    }else if(m_30->count(*m)){
+        if(*d > 30)*error_flag = 1;
     }
-    replace(add_date->begin(),add_date->end(), ' ', '/');
-    return 1;
+
+    delete ss;
+    delete y;
+    delete m;
+    delete d;
+    delete m_30;
+    
+    if(!(*error_flag)){
+        delete error_flag;
+        return 1;
+    }else{
+        delete error_flag;
+        return 0;
+    }
 
 }

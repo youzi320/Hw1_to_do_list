@@ -1,0 +1,32 @@
+Date : 2025-04-19 20:25:06
+Directory : d:\nycu course\2025_spring\Data Structures and Object-oriented Programming\hw1\Hw_1_to_do_list\to_do_list
+Total : 6 files,  36 codes, 231 comments, 46 blanks, all 313 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| C++      |          6 |         36 |        231 |         46 |        313 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                             | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                                |          6 |         36 |        231 |         46 |        313 |
+| header                                                                                                                           |          2 |         32 |          0 |          9 |         41 |
+| src                                                                                                                              |          4 |          4 |        231 |         37 |        272 |
++----------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                                                         | language | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| d:\nycu course\2025_spring\Data Structures and Object-oriented Programming\hw1\Hw_1_to_do_list\to_do_list\header\handle_input.h  | C++      |         15 |          0 |          4 |         19 |
+| d:\nycu course\2025_spring\Data Structures and Object-oriented Programming\hw1\Hw_1_to_do_list\to_do_list\header\print_line.h    | C++      |         17 |          0 |          5 |         22 |
+| d:\nycu course\2025_spring\Data Structures and Object-oriented Programming\hw1\Hw_1_to_do_list\to_do_list\src\handle_input.cpp   | C++      |        195 |          0 |         25 |        220 |
+| d:\nycu course\2025_spring\Data Structures and Object-oriented Programming\hw1\Hw_1_to_do_list\to_do_list\src\main.cpp           | C++      |       -256 |        231 |          0 |        -25 |
+| d:\nycu course\2025_spring\Data Structures and Object-oriented Programming\hw1\Hw_1_to_do_list\to_do_list\src\print_line.cpp     | C++      |         71 |          0 |         12 |         83 |
+| d:\nycu course\2025_spring\Data Structures and Object-oriented Programming\hw1\Hw_1_to_do_list\to_do_list\src\to_do_list_cmd.cpp | C++      |         -6 |          0 |          0 |         -6 |
+| Total                                                                                                                            |          |         36 |        231 |         46 |        313 |
++----------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

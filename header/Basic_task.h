@@ -9,6 +9,12 @@
 #include <list>
 #include <ctime>
 #include <iomanip>
+#include <cstring>
+#include <algorithm>
+#include <fstream>
+#include <string>
+#include <conio.h>
+#include "check.h"
 
 using namespace std;
 

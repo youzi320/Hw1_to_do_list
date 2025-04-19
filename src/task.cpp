@@ -1,21 +1,18 @@
-#include "../header/Basic_task.h"
+#include "../header/Basic_task.h" //d ok //p ok
 #include "../header/task.h"
 
 task::task(){
-    this->name = new string(1000,'\0');//預設需delete?
-    this->category = new string(1000,'\0');
+    this->name = new string;
+    this->category = new string;
     this->completed = new bool(false);
-
-    this->is_new_ = new bool(0);
-    this->date = new string(15,'\0');
+    this->date = new string;
 }
 
 task::task(string *name, string *date, string *category, bool *completed){//預設none?
-    this->name = new string(1000,'\0');
-    this->date = new string(15,'\0');
-    this->category = new string(15,'\0');
+    this->name = new string;
+    this->date = new string;
+    this->category = new string;
     this->completed = new bool(false);
-    this->is_new_ = new bool(false);
 
     *(this->name) = *name;
     *(this->category) = *category;
@@ -23,31 +20,30 @@ task::task(string *name, string *date, string *category, bool *completed){//預�
     *(this->completed) = *completed;
 }
 
-task::task(string *date){//預設none?
-
-    this->date = new string(15,'\0');
-
-    *(this->date) = *date;
-}
-
 task::task(task *copy){//預設none?
-    this->name = new string(1000,'x');
-    this->date = new string(15,'x');
-    this->category = new string(15,'x');
+    this->name = new string;
+    this->date = new string;
+    this->category = new string;
     this->completed = new bool(false);
-    this->is_new_ = new bool;
 
     *(this->name) = *(copy->name);
     *(this->category) = *(copy->category);
     *(this->completed) = *(copy->completed);
-    //cout << "this: " << *this->completed << endl;
-    *(this->is_new_) = *(copy->is_new_);
     *(this->date) = *(copy->date);
 }
 
-void task::view_task(int m_n, int c_n){
+task::task(string *date){//預設none?
+    this->name = new string("none");
+    this->date = new string;
+    this->category = new string("none");
+    this->completed = new bool(false);
+
+    *(this->date) = *date;
+}
+
+void task::view_task(){
     cout << "|";
-    cout << setw(20) << *this->name << "|" << setw(20) << *this->date << "|" << setw(20)  << *this->category << "|" <<  setw(20) << *this->completed << "|" << endl;  
+    cout << setw(20) << *this->name << "|" << setw(20) << *this->date << "|" << setw(20)  << *this->category << "|" <<  setw(20) << (*this->completed ? "Yes" : "No") << "|" << endl;  
     cout << "-------------------------------------------------------------------------------------" << endl;
 }
 
@@ -67,10 +63,10 @@ bool * task::get_completed() const{
     return this->completed;
 }
 
-bool task::is_new() const{ //好像沒用到，之後刪
-    return is_new_;
-}
 
 task::~task(){
+    delete name;
+    delete category;
+    delete completed;
     delete date;
 }
