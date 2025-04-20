@@ -1,6 +1,13 @@
 # To-Do list
-
 ---
+## 執行專案
+windows:
+```
+cd src
+g++ *.cpp to_do_list_class\*.cpp -o to_do_list.exe
+./to_do_list.exe
+```
+
 ## 專案目錄結構
 ```
 .
