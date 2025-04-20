@@ -43,11 +43,11 @@ g++ *.cpp to_do_list_class\*.cpp -o to_do_list.exe
       └── user_data.txt 
 ```
 ### 說明
+- src/main.cpp : 主程式
 - header/ : 存放標頭檔
 - src/to_do_class/ : 各類to_do_list指令實作
 - src/*.cpp : 各主要類別的實作檔案與一些檢查資料、輸出版面的程式
 - src/user_file/user_data.txt : 存放使用者資料
-
 
 ## task
 一個task(任務)有以下欄位:
