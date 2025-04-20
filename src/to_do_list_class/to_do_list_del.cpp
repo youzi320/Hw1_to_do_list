@@ -49,6 +49,7 @@ void to_do_list::del(string *name, string *date, int *flag){
                 delete tmp;
             }
 
+            delete *it;
             (*(this->to_do)).erase(it);
 
             delete op;

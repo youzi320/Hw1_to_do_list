@@ -343,9 +343,7 @@ int user::user_op(string *op, string *username, string *task_name,string *date, 
     }
 
     ffile->close();
-
-    //del_user(name, password);
-
+    
     delete ffile;
     delete line;
     delete task_str;

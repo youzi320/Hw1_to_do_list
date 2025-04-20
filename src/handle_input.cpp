@@ -1,4 +1,4 @@
-#include <iostream> //d ok //p ok
+#include <iostream>
 #include <string>
 #include <vector>
 #include <set>
@@ -26,14 +26,27 @@ int login(){
         welcome();
         cin >> *op;
         if(*op == "1"){
+            user_name->clear();
+            tmp_str->clear();
             cout << "user name: ";
             cin >> *user_name;
             cout << "password: ";
-            cin >> *tmp_str;
+            while((*ch = getch() ) != '\r'){
+                if(*ch == '\b'){
+                    if(!tmp_str->empty()){
+                        tmp_str->pop_back();
+                        cout << "\b \b";
+                    }
+                }else{
+                    tmp_str->push_back(*ch);
+                    cout << "*";
+                }
+            }
+            cout << endl;
             if(user_->login(user_name, tmp_str) != 0){
                 break;
             }else{
-                cout << endl << endl << "Incorrect User or Incorrect Password!!!" << endl << endl;
+                cout << endl << endl << "Incorrect User or Incorrect Password!!!" << endl;
             }
         }else if(*op == "2"){
             user_name->clear();
@@ -63,14 +76,14 @@ int login(){
                     cout << endl;
                 }else if(*register_op == "3"){
                     if(user_name->empty() || tmp_str->empty()){
-                        cout << endl << "User Name or Password is Unset !!!" << endl << endl;
+                        cout << endl << "User Name or Password is Unset !!!" << endl;
                         continue;
                     }else if(user_->create_user_file(user_name, tmp_str) ){
                         user_->add_user(user_name, tmp_str);
-                        cout << endl << "User Added Successfully" << endl << endl;
+                        cout << endl << "User Added Successfully" << endl;
                         break;
                     }else{
-                        cout << endl << "User already exists!!!" << endl << endl;
+                        cout << endl << "User already exists!!!" << endl;
                         continue;
                     }
                     break;
@@ -79,7 +92,7 @@ int login(){
                     tmp_str->clear();
                     break;
                 }else{
-                    cout << endl << "Not a valid command..." << endl << endl;
+                    cout << endl << "Not a valid command..." << endl;
                 }
             }
         }else if(*op == "3"){
@@ -93,7 +106,7 @@ int login(){
                     cin >> *user_name;
                 }else if(*register_op == "2"){
                     if(user_name->empty()){
-                        cout << endl << "User Name is Unset !!!" << endl << endl;
+                        cout << endl << "User Name is Unset !!!" << endl;
                         continue;
                     }
                     cout << "Enter Password: ";
@@ -110,7 +123,7 @@ int login(){
                     }
                     if(user_->delete_user_file(user_name, tmp_str) == 1){
                         user_->del_user(user_name, tmp_str);
-                        cout << endl << endl << "User Deleted Successfully" << endl << endl;
+                        cout << endl << endl << "User Deleted Successfully" << endl;
                         break;
                     }
                 }else if(*register_op == "3"){
@@ -118,7 +131,7 @@ int login(){
                     tmp_str->clear();
                     break;
                 }else{
-                    cout << endl << "Not a valid command..." << endl << endl;
+                    cout << endl << "Not a valid command..." << endl;
                 }
             }
         }else if(*op == "4"){
@@ -130,7 +143,7 @@ int login(){
             delete in_login;
             return 0;
         }else{
-            cout << endl << "Not a valid command..." << endl << endl;
+            cout << endl << "Not a valid command..." << endl;
         }
     }
 

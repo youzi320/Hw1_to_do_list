@@ -11,8 +11,10 @@
 
 using namespace std;
 
+//檢查閏年
 int check_leap(int *y);
 
+//檢查日期是否合理
 int check_date(string *add_date);
 
 #endif

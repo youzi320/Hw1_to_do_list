@@ -1,4 +1,4 @@
-#include <iostream> //d ok //p ok
+#include <iostream>
 #include <string>
 #include <vector>
 #include <set>
@@ -30,7 +30,7 @@ int calendar::is_valid(vector<string *> *cmd_record, int *input, int *mn, int *m
 
     *ss << *(*cmd_record)[1];
 
-    if(!(*ss >> *input) || *input < *mn || *input > *mx){
+    if(!(*ss >> *input) || *input < *mn || *input > *mx || (*cmd == "year" && *input < 1000)){
         cout << endl << "Invalid " << *cmd << endl << endl;
         delete ss;
         return 0;

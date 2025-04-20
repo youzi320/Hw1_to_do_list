@@ -35,13 +35,15 @@ void to_do_list::view(vector<string *> *cmd_record){
             }else{
                 if(cmd_record->size() < 3){
                     cout << endl << "view: too few arguments" << endl << endl;
+                    return;
                 }else if(cmd_record->size() > 3){
                     cout << endl << "view: too many arguments" << endl << endl;
+                    return;
                 }else if ((**next(cmd_it))[0] == '-') {
                     cout << endl << "view: option requires an argument -- '" << (**cmd_it)[1] << endl
                                 << "Try 'man view' for more information." << endl << endl;
+                    return;
                 }
-
                 if( **cmd_it == "-d" ){
                     string *type = new string("date");
                     view(type, *next(cmd_it) );
@@ -59,7 +61,7 @@ void to_do_list::view(vector<string *> *cmd_record){
         }else{
             if((**cmd_it)[0] == '-'){
                 cout << endl << "view: invalid option -- '" << (*cmd_it)->substr(1,(*cmd_it)->length())  << "'" << endl 
-                            << " Try 'man view' for more information. " << endl << endl;
+                            << "Try 'man view' for more information. " << endl << endl;
             }
         }
     }

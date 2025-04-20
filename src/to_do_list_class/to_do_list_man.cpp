@@ -5,34 +5,38 @@ using namespace std;
 void to_do_list::man (int *op){
     if(*op == 1){
         cout << endl << "Usage: add [-n] [-d] [-ca]" << endl;
-        cout << "-n [name]: \tadd new task with name [name]" << endl;
-        cout << "-d [date]: \tadd new task with date [date], Format:[year]/[month]/[date], ex. 2025/04/20" << endl;
-        cout << "-ca [category]: \tadd new task with category [category]" << endl << endl;
+        cout << "-n [name]: add new task with name [name]" << endl;
+        cout << "-d [date]: add new task with date [date], Format:[year]/[month]/[date], ex. 2025/04/20" << endl;
+        cout << "-ca [category]: add new task with category [category]" << endl << endl;
     }else if(*op == 2){
         cout << endl << "Usage: view [-a] [-n] [-d] [-ca] [-done] [-undone]" << endl;
-        cout << "-a\tview all tasks" << endl;
-        cout << "-a\tview by name" << endl;
-        cout << "-d\tview by specific date" << endl;
-        cout << "-ca\tview by category" << endl;
-        cout << "-done\tview completed tasks" << endl;
-        cout << "-undone\tview incompleted tasks" << endl << endl;
+        cout << "-a: view all tasks" << endl;
+        cout << "-n [name]: view by name [name]" << endl;
+        cout << "-d [date]: view by specific date [date]" << endl;
+        cout << "-ca [category]: view by specific category [category]" << endl;
+        cout << "-done: view completed tasks" << endl;
+        cout << "-undone: view incompleted tasks" << endl << endl;
         
     }else if(*op == 3){
         cout << endl << "Usage: edit [original name] [orginal date] [-n] [-d] [-ca] [-co] " << endl;
-        cout << "-n [name]: \tedit name" << endl;
-        cout << "-d [date]: \tedit date" << endl;
-        cout << "-ca [category]: \tedit category" << endl;
-        cout << "-co [1 or 0]: \tedit completed" << endl << endl;
+        cout << "-n [name]: edit original task's date to [name]" << endl;
+        cout << "-d [date]: edit original task's date to [date]" << endl;
+        cout << "-ca [category]: edit original task's category to [category]" << endl;
+        cout << "-co [1 or 0]: edit original task's completion" << endl << endl;
     }else if(*op == 4){
         cout << endl << "Usage: del [name] [date]" << endl << endl;
     }else if(*op == 5){
-        cout << endl << "Usage: calendar" << endl << endl;
-        cout << "In calendar mode, you can use [mt] command" << endl << endl;
+        cout << endl << "Calendar mode" << endl << endl;
+        cout << "year [year]: set year to [year]" << endl;
+        cout << "month [month]: set month to [month]" << endl;
+        cout << "day [day]: set  day to [day]" << endl << endl;
+        cout << "In calendar mode, you can use [mt] command(After setting the year, month, and day):" << endl;
         cout << "Usage: mt [-e] [-add] [-done] [-del]" << endl;
-        cout << "-n [name]: \tedit task name on specific day" << endl;
-        cout << "-add [name]: \tadd new task on specific day" << endl;
-        cout << "-done [name]: \tmark task as completed on specific day by name" << endl;
-        cout << "-del [name]: \tdelete task on specific day by name" << endl << endl;
+        cout << "-e [original name] [new name]:  edit task name on specific day" << endl;
+        cout << "-add [name]: add new task on specific day" << endl;
+        cout << "-done [name]: mark task as completed on specific day by name" << endl;
+        cout << "-undone [name]: mark task as incompleted on specific day by name" << endl;
+        cout << "-del [name]: delete task on specific day by name" << endl << endl;
     }
     
 }

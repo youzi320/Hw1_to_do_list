@@ -12,7 +12,9 @@
 #include "task.h"
 #include "user.h"
 
+// 輸出當日日期 + 使用者名稱與命令提示字元
 void print_user_info();
+
 void del_menu();
 void register_menu();
 void welcome();

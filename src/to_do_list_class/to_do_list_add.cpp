@@ -23,7 +23,7 @@ void to_do_list::add(vector<string *> *cmd_record){
             if( (**cmd_it) == "-n" ||  (**cmd_it) == "-d" || (**cmd_it) == "-ca"){
                 if (cmd_it == prev(cmd_record->end()) || (**next(cmd_it))[0] == '-') {
                     cout << endl << "add: option requires an argument -- '" << (**cmd_it)[1] << "'" << endl
-                                  << "Try 'man add' for more information." << endl << endl;
+                                <<  "Try 'man add' for more information." << endl << endl;
                     *error_flag = 1;
                     break;
                 }
@@ -33,7 +33,7 @@ void to_do_list::add(vector<string *> *cmd_record){
                     *add_date = (**next(cmd_it));
                     if(!check_date(add_date)){
                         cout << endl << "Not a valid date format!!!" << endl
-                                    << "Should be [year]/[month]/[date], ex. 2025/04/20" << endl << endl;
+                                    <<  "Should be [year]/[month]/[date], ex. 2025/04/20" << endl << endl;
                         *error_flag = 1;
                     }
                 }else if( (**cmd_it) == "-ca"){
@@ -44,7 +44,7 @@ void to_do_list::add(vector<string *> *cmd_record){
             }else{
                 if((**cmd_it)[0] == '-'){
                     cout << endl << "add: invalid option -- '" << (*cmd_it)->substr(1,(*cmd_it)->length())  << "'" << endl 
-                                  << "Try 'man add' for more information. " << endl << endl;
+                                <<  "Try 'man add' for more information. " << endl << endl;
                 }else{
                     cout << endl << "syntax error: missing flag(s)" << endl << endl;
                 }
@@ -71,8 +71,8 @@ void to_do_list::add(vector<string *> *cmd_record){
 }
 
 
-void to_do_list::add(string *name,string *date, string *category, bool *completed, int *flag){ //若沒有指定category就是none
-    if(this->find_name_date(name, date)){//修改成date一樣, category一樣才重複
+void to_do_list::add(string *name,string *date, string *category, bool *completed, int *flag){ 
+    if(this->find_name_date(name, date)){
         cout  << endl << "Task already exists!" << endl;
         return;
     }

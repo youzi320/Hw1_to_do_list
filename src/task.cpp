@@ -1,4 +1,4 @@
-#include "../header/Basic_task.h" //d ok //p ok
+#include "../header/Basic_task.h"
 #include "../header/task.h"
 
 task::task(){

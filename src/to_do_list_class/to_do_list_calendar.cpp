@@ -28,20 +28,12 @@ void to_do_list::calendar(vector<string *> *cmd_pre){
             if(*now_year != 0){
                 *pt_date = to_string(*now_year);
             }
+            
             if(*now_month != 0){
-                if(*now_month < 10){
-                    *pt_date += "/0" + to_string(*now_month);
-                }else{
-                    *pt_date += "/" + to_string(*now_month);
-                }
+                *pt_date += *now_month < 10 ?  "/0" + to_string(*now_month) : "/" + to_string(*now_month);
             }
             if(*now_day != 0){
-                if(*now_day < 10){
-                    *pt_date += "/0" + to_string(*now_day);
-            
-                }else{
-                    *pt_date += "/" + to_string(*now_day);
-                }
+                *pt_date += *now_day < 10 ?  "/0" + to_string(*now_day) : "/" + to_string(*now_day);
             }
 
             if(pt_date->empty()){
@@ -130,7 +122,7 @@ void to_do_list::mt(vector<string *> *cmd_record){
         *error_flag = 1;
     }else{
         cmd_it++;
-        if(**cmd_it == "-e" || **cmd_it == "-done" || **cmd_it == "-add" || **cmd_it == "-del"){
+        if(**cmd_it == "-e" || **cmd_it == "-done" || **cmd_it == "-undone" || **cmd_it == "-add" || **cmd_it == "-del"){
 
             if(cmd_record->size() < 3){
                 cout << endl << "mt: too few arguments" << endl << endl;
@@ -155,7 +147,7 @@ void to_do_list::mt(vector<string *> *cmd_record){
                     }  
                 }
                 
-            }else if( **cmd_it == "-done" ){
+            }else if( **cmd_it == "-done" || **cmd_it == "-undone"){
                 if(cmd_record->size() < 3){
                     cout << endl << "mt: too few arguments" << endl << endl;
                     *error_flag = 1;
@@ -163,8 +155,10 @@ void to_do_list::mt(vector<string *> *cmd_record){
                     cout << endl << "mt: too many arguments" << endl << endl;
                     *error_flag = 1;
                 }else{
-                    string *str = new string("name");
-                    edit((*cmd_record)[2],  pt_date, 0, str);
+                    string *type = new string("completed");
+                    string *str= new string();
+                    *str = **cmd_it == "-done" ? "1" : "0";
+                    edit((*cmd_record)[2],  pt_date, str, type);
                     delete str;
                 }
             }else if( **cmd_it == "-add" ){
@@ -328,7 +322,7 @@ void to_do_list::print_month(int *m){
         for(*i=0;*i<6;(*i)++){//每天格數
             cout << "|";
             for(*j=0;*j<7;(*j)++){//七天各跑一遍
-                //條件待檢查
+
                 if(date_task[*j]->first.first != date_task[*j]->first.second  &&  date_task[*j]->second != prev(date_task[*j]->first.second) && date_task[*j]->second != date_task[*j]->first.second && *i == 5){
                     cout << setw(21) << "..." << "|";
                 }else if((date_task[*j]->first.first != date_task[*j]->first.second) && date_task[*j]->second != date_task[*j]->first.second){

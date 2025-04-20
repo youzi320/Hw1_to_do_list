@@ -7,14 +7,14 @@ void to_do_list::undo(vector<string *> *cmd_record){
         cout << endl << "undo: too many arguments..." << endl << endl;
     }else{                  
         if(undo()){
-            cout << endl << "Undo Operation Done!" << endl;
+            cout << endl << "Undo Operation Done!" << endl << endl;
         }
     }
 }
 
 int to_do_list::undo(){
     if(this->un_re->empty() || idx == this->un_re->begin()){
-        cout << endl << "No Previous Action!" << endl;
+        cout << endl << "No Previous Action!" << endl << endl;
         return 0;
     }
     list<pair<int *, pair<task* , task *> > >::iterator tmp = idx;
@@ -44,7 +44,7 @@ void to_do_list::redo(vector<string *> *cmd_record){
         cout << endl << "redo: too many arguments..." << endl << endl;
     }else{                  
         if(redo()){
-            cout << endl << "Redo Operation Done!" << endl;
+            cout << endl << "Redo Operation Done!" << endl << endl;
         }
     }
 }
@@ -52,7 +52,7 @@ void to_do_list::redo(vector<string *> *cmd_record){
 
 int to_do_list::redo(){
     if(this->un_re->empty() || next(idx) == this->un_re->end()){
-        cout << endl << "No Later Action!" << endl;
+        cout << endl << "No Later Action!" << endl << endl;
         return 0;
     }
 

@@ -19,9 +19,13 @@ public:
 
     int is_valid(vector<string *> *cmd_record, int *input, int *mn, int *mx, string *cmd);
 
-
+    //calendar 模式下設定年份
     int year(vector<string *> *cmd_record);
+
+    //calendar 模式下設定月份
     int month(vector<string *> *cmd_record);
+
+    //calendar 模式下設定天
     int day(vector<string *> *cmd_record);
 
     virtual ~calendar();

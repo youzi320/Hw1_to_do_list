@@ -19,20 +19,21 @@ public:
 
     
     to_do_list();
-    /*回傳特定task回傳是否在 *to_do set 中*/
+    /*回傳特定task回傳是否在 *to_do vecotor中*/
     int find_name_date(string *name, string *date) const;
 
-    /*回傳特定task回傳是否在*to_do set中*/
+    /*回傳特定task回傳是否在*to_do vecotor中*/
     int find_date(string *date) const;
 
-    /*新增task到*to_do set中*/
+    /*新增task到*to_do vecotor中*/
     void add(vector<string *> *cmd_record);
     void add(string *name,string *date, string *category, bool *completed, int *flag);
     
+    /*修改*to_do vecotor中的task欄位*/
     void edit(vector<string *> *cmd_record);
     void edit(string *name, string *date, string *str, string *type);
 
-
+    /*刪除*to_do vecotor中的task*/
     void del(vector<string *> *cmd_record);
     void del(string *name, string *date, int *flag);
 
@@ -51,25 +52,24 @@ public:
     int redo();
 
 
-
     /*輸出指令manual*/
     void man(vector<string *> *cmd_record);
     void man (int *op);
 
-
-    void view(vector<string *> *cmd_record);
-    /*依據date輸出當日所有task*/
-    void view_date(string *date) const;
-    
     /*依據指定規則輸出task*/
+    void view(vector<string *> *cmd_record);
     void view(string *type, string *str = 0);
 
+    //calendar模式
     void calendar(vector<string *> *cmd_pre = 0);
+    //輸出行事曆
     void print_month(int *m);
+    //輸出當日task 
     void print_day(int *d);
-
+    //mt(manage task)指令
     void mt(vector<string *> *cmd_record);
 
+    //每次啟動程式時，從txt檔讀取使用者資料
     int load_user();
 
     ~to_do_list();
