@@ -39,9 +39,9 @@ ex. add -n t1 -d 2025/04/20 (新增名為 t1 日期為 2025/04/20 的任務)
 ```
 view [-a] [-n] [-d] [-ca] [-done] [-undone]
 -a: 輸出全部任務(排列順序為1.日期 2.是否完成 3.名子)
--n [name]: 順序全部名為 [name] 的任務
--d [date]: 順序全部日期為 [date] 的任務
--ca [category]: 順序全部類別為 [category] 的任務
+-n [name]: 輸出全部名為 [name] 的任務
+-d [date]: 輸出全部日期為 [date] 的任務
+-ca [category]: 輸出全部類別為 [category] 的任務
 -done: 輸出已完成任務
 -undone: 輸出未完成任務
 
