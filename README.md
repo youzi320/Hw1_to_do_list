@@ -1,6 +1,46 @@
 # To-Do list
 
 ---
+## 專案目錄結構
+```
+.
+├── header/  
+|  ├── Basic_task.h  
+|  ├── calendar.h  
+|  ├── check.h  
+|  ├── handle_input.h  
+|  ├── print_line.h  
+|  ├── sort_cmp.h  
+|  ├── task.h  
+|  ├── to_do_list.h 
+|  └── user.h 
+└── src/ 
+  ├── to_do_list_class/ 
+  │ ├── to_do_list_add.cpp 
+  │ ├── to_do_list_calendar.cpp 
+  │ ├── to_do_list_del.cpp 
+  │ ├── to_do_list_edit.cpp 
+  │ ├── to_do_list_man.cpp 
+  │ ├── to_do_list_undo_redo.cpp 
+  │ ├── to_do_list_view.cpp 
+  │ └── to_do_list.cpp 
+  ├── calendar.cpp 
+  ├── check.cpp 
+  ├── handle_input.cpp 
+  ├── main.cpp
+  ├── print_line.cpp 
+  ├── sort_cmp.cpp 
+  ├── task.cpp 
+  |── user.cpp
+  └─── user_file/ 
+      └── user_data.txt 
+```
+### 說明
+- header/ : 存放標頭檔
+- src/to_do_class/ : 各類to_do_list指令實作
+- src/*.cpp : 各主要類別的實作檔案與一些檢查資料、輸出版面的程式
+- src/user_file/user_data.txt : 存放使用者資料
+
 
 ## task
 一個task(任務)有以下欄位:
